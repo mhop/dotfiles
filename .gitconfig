@@ -1,0 +1,8 @@
+[mergetool "meld2way"]
+	cmd = meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+[mergetool "meld3way"]
+	cmd = meld --output \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[merge]
+	tool = meld2way
+[include]
+        path = ~/.gituser
