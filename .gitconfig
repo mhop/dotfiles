@@ -1,8 +1,17 @@
 [mergetool "meld2way"]
-	cmd = meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+	cmd = meld \"$LOCAL\" \"$REMOTE\"
 [mergetool "meld3way"]
-	cmd = meld --output \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	cmd = meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+#	cmd = meld --output \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [merge]
+	tool = meld3way
+[diff]
 	tool = meld2way
 [include]
         path = ~/.gituser
+[color]
+	ui = auto
+[push]
+	default = simple
+[user]
+	email = mhop@posteo.de
