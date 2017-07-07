@@ -1,3 +1,4 @@
+;;; mh.emacs --- Summary 
 
 
 (require 'package)
@@ -22,7 +23,7 @@
 ;; keine "yes-or-no"-Fragen - "y-or-n" reicht aus
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; ZusammengehÃ¶rende Klammern hervorheben
+;; Zusammengehoerende Klammern hervorheben
 (show-paren-mode 1)
 ;; Text zwischen den Klammern nicht hervorheben
 (setq show-paren-style 'parenthesis)
@@ -60,12 +61,6 @@
 (set-language-environment 'german)
 (set-terminal-coding-system 'iso-latin-1)
 
-(setq c-default-style "stroustrup"
-          c-basic-offset 4)
-
-(setq-default c-basic-offset 2
-                  tab-width 2
-                  indent-tabs-mode t)
 
 (defconst knf-c-style
   '((c-basic-offset . 2)
@@ -89,7 +84,14 @@
   "BSD KNF")
 
 (c-add-style "knf" knf-c-style)
-(setq c-default-style "knf")
+;;(setq c-default-style "knf")
+
+(setq c-default-style "linux"
+          c-basic-offset 2)
+
+(setq-default c-basic-offset 2
+                  tab-width 2
+                  indent-tabs-mode t)
 
 (org-babel-do-load-languages
       'org-babel-load-languages
@@ -112,20 +114,27 @@
                                   ("%b - Dir:  " default-directory)))))))
 
 
+(setq-default indent-tabs-mode t)
+(setq tab-width 4)
 
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; ------ Flycheck ------------------
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(flycheck-define-checker vhdl-nvc
+ "A VHDL syntax checker using nvc."
+ :command ("nvc" "--message=compact" "-a" source)
+ :error-patterns ((error line-start (file-name) ":" line ":" column ": error: " (message) line-end))
+ :modes vhdl-mode)
+
+;; ---------------------------------------------------
+
  '(package-selected-packages
 	 (quote
 		(which-key use-package s flymake-cppcheck flycheck-elixir flycheck-cython eval-in-repl ecb cppcheck)))
@@ -142,3 +151,22 @@
 						(global-set-key "\M-9" '(lambda () (interactive) (insert "}")))
 						(global-set-key "\M-n" '(lambda () (interactive) (insert "~")))
 ;						))))
+
+;; ----------------------------------
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(show-trailing-whitespace t)
+ '(vhdl-indent-tabs-mode t))
+
+
