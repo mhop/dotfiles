@@ -17,9 +17,6 @@
 (setq make-backup-files nil) ;; stop creating those backup~ files
 (setq auto-save-default nil) ;; stop creating those #autosave# files
 
-;; ausgewÃ¤hlten Text bei Eingabe lÃ¶schen
-;;(delete-selection-mode 1)
-
 ;; keine "yes-or-no"-Fragen - "y-or-n" reicht aus
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -61,10 +58,12 @@
 (set-language-environment 'german)
 (set-terminal-coding-system 'iso-latin-1)
 
-
-
 (setq c-default-style "linux"
           c-basic-offset 2)
+
+(setq-default c-basic-offset 2
+                  tab-width 2
+                  indent-tabs-mode t)
 
 (org-babel-do-load-languages
       'org-babel-load-languages
@@ -86,6 +85,9 @@
                                   (revert-buffer-function " %b"
                                   ("%b - Dir:  " default-directory)))))))
 
+
+(setq-default indent-tabs-mode t)
+(setq tab-width 4)
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -119,24 +121,12 @@
 
 ;; ---------------------------------------------------
 
- '(package-selected-packages
+'(package-selected-packages
 	 (quote
 		(which-key use-package s flymake-cppcheck flycheck-elixir flycheck-cython eval-in-repl ecb cppcheck)))
- '(show-trailing-whitespace t)
+'(show-trailing-whitespace t)
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
-(global-set-key "\M-l" '(lambda () (interactive) (insert "@")))
-(global-set-key "\M-5" '(lambda () (interactive) (insert "[")))
-(global-set-key "\M-6" '(lambda () (interactive) (insert "]")))
-(global-set-key "\M-7" '(lambda () (interactive) (insert "|")))
-(global-set-key "\M-/" '(lambda () (interactive) (insert "\\")))
-(global-set-key "\M-8" '(lambda () (interactive) (insert "{")))
-(global-set-key "\M-9" '(lambda () (interactive) (insert "}")))
-(global-set-key "\M-n" '(lambda () (interactive) (insert "~")))
-
-				   ;						))))
-
 
 ;; ----------------------------------
 
@@ -153,7 +143,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(show-trailing-whitespace t)
- ;;'(vhdl-indent-tabs-mode t)
- )
+ '(vhdl-indent-tabs-mode t))
 
 
