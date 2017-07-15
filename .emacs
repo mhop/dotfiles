@@ -18,7 +18,7 @@
 (setq auto-save-default nil) ;; stop creating those #autosave# files
 
 ;; ausgewÃ¤hlten Text bei Eingabe lÃ¶schen
-(delete-selection-mode 1)
+;;(delete-selection-mode 1)
 
 ;; keine "yes-or-no"-Fragen - "y-or-n" reicht aus
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -47,7 +47,7 @@
   (ido-mode 1)
 (cscope-setup)
 ;(setq cscope-command-args -R )
-(add-hook 'vhdl-mode-hook (function cscope-minor-mode))
+;(add-hook 'vhdl-mode-hook (function cscope-minor-mode))
 
 (require 'ecb)
   (setq ido-enable-flex-matching t)
@@ -62,36 +62,9 @@
 (set-terminal-coding-system 'iso-latin-1)
 
 
-(defconst knf-c-style
-  '((c-basic-offset . 2)
-    (c-indent-level . 2)
-    (c-continued-statement-offset . 2)
-    (c-brace-offset . -2)
-    (c-argdecl-indent . 2)
-    (c-label-offset . -2)
-    (c-offsets-alist . ((knr-argdecl-intro . +)
-                        (knr-argdecl . 0)
-                        (block-open . -)
-                        (label . -)
-                        (statement-cont . 2)
-                        (arglist-cont . 2)
-												(innamespace . 0)
-												(statement-case-intro . 2)
-                        (substatement-open . 0)
-                        (case-label 2)
-                        (inline-open 0)
-                        (arglist-cont-nonempty 2))))
-  "BSD KNF")
-
-(c-add-style "knf" knf-c-style)
-;;(setq c-default-style "knf")
 
 (setq c-default-style "linux"
           c-basic-offset 2)
-
-(setq-default c-basic-offset 2
-                  tab-width 2
-                  indent-tabs-mode t)
 
 (org-babel-do-load-languages
       'org-babel-load-languages
@@ -114,10 +87,21 @@
                                   ("%b - Dir:  " default-directory)))))))
 
 
-(setq-default indent-tabs-mode t)
-(setq tab-width 4)
-
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;; --------- Smart-tabs -------------
+
+(setq-default c-basic-offset 4
+              tab-width 4
+              indent-tabs-mode t)
+
+(smart-tabs-add-language-support c++ c++-mode-hook
+  ((c-indent-line . c-basic-offset)
+   (c-indent-region . c-basic-offset)))
+(smart-tabs-advice vhdl-indent-line vhdl-basic-offset)
+
+(smart-tabs-insinuate 'c 'c++ 'javascript)
+
 
 ;; ------ Flycheck ------------------
 
@@ -138,19 +122,21 @@
  '(package-selected-packages
 	 (quote
 		(which-key use-package s flymake-cppcheck flycheck-elixir flycheck-cython eval-in-repl ecb cppcheck)))
- '(show-trailing-whitespace t))
+ '(show-trailing-whitespace t)
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-						(global-set-key "\M-l" '(lambda () (interactive) (insert "@")))
-						(global-set-key "\M-5" '(lambda () (interactive) (insert "[")))
-						(global-set-key "\M-6" '(lambda () (interactive) (insert "]")))
-						(global-set-key "\M-7" '(lambda () (interactive) (insert "|")))
-						(global-set-key "\M-/" '(lambda () (interactive) (insert "\\")))
-						(global-set-key "\M-8" '(lambda () (interactive) (insert "{")))
-						(global-set-key "\M-9" '(lambda () (interactive) (insert "}")))
-						(global-set-key "\M-n" '(lambda () (interactive) (insert "~")))
-;						))))
+(global-set-key "\M-l" '(lambda () (interactive) (insert "@")))
+(global-set-key "\M-5" '(lambda () (interactive) (insert "[")))
+(global-set-key "\M-6" '(lambda () (interactive) (insert "]")))
+(global-set-key "\M-7" '(lambda () (interactive) (insert "|")))
+(global-set-key "\M-/" '(lambda () (interactive) (insert "\\")))
+(global-set-key "\M-8" '(lambda () (interactive) (insert "{")))
+(global-set-key "\M-9" '(lambda () (interactive) (insert "}")))
+(global-set-key "\M-n" '(lambda () (interactive) (insert "~")))
+
+				   ;						))))
+
 
 ;; ----------------------------------
 
@@ -167,6 +153,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(show-trailing-whitespace t)
- '(vhdl-indent-tabs-mode t))
+ ;;'(vhdl-indent-tabs-mode t)
+ )
 
 
