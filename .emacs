@@ -145,4 +145,3 @@
  '(show-trailing-whitespace t)
  '(vhdl-indent-tabs-mode t))
 
-
