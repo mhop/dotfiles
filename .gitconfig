@@ -15,10 +15,11 @@
 	default = simple
 [user]
 	email = mhop@posteo.de
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+	name = Marc Hoppe
 [oh-my-zsh]
 	hide-dirty = 1
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
+	required = true

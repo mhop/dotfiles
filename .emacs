@@ -25,6 +25,7 @@
 ;; Text zwischen den Klammern nicht hervorheben
 (setq show-paren-style 'parenthesis)
 
+
 (use-package which-key
   :ensure t
   :config
@@ -49,21 +50,17 @@
 (require 'ecb)
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
-  (ido-mode 1)
+(ido-mode 1)
 
 (require 'cedet)
 (global-ede-mode t)
 
 ; Make umlauts work
 (set-language-environment 'german)
-(set-terminal-coding-system 'iso-latin-1)
+(set-terminal-coding-system 'utf-8-emacs)
 
 (setq c-default-style "linux"
-          c-basic-offset 2)
-
-(setq-default c-basic-offset 2
-                  tab-width 2
-                  indent-tabs-mode t)
+          c-basic-offset 4)
 
 (org-babel-do-load-languages
       'org-babel-load-languages
@@ -86,8 +83,6 @@
                                   ("%b - Dir:  " default-directory)))))))
 
 
-(setq-default indent-tabs-mode t)
-(setq tab-width 4)
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -95,7 +90,7 @@
 
 (setq-default c-basic-offset 4
               tab-width 4
-              indent-tabs-mode t)
+              indent-tabs-mode nil)
 
 (smart-tabs-add-language-support c++ c++-mode-hook
   ((c-indent-line . c-basic-offset)
@@ -130,6 +125,17 @@
 
 ;; ----------------------------------
 
+(add-hook 'term-exec-hook
+          (function
+           (lambda ()
+             (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -143,5 +149,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(show-trailing-whitespace t)
- '(vhdl-indent-tabs-mode t))
+ '(vhdl-indent-tabs-mode nil))
 
