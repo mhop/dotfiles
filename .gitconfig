@@ -19,7 +19,9 @@
 [oh-my-zsh]
 	hide-dirty = 1
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
+	smudge = git-lfs smudge --skip -- %f
 	clean = git-lfs clean -- %f
-	process = git-lfs filter-process
+	process = git-lfs filter-process --skip
 	required = true
+[core]
+	pager = less -F -X
