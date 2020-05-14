@@ -7,7 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="agnoster"
-ZSH_THEME="jreese"
+ZSH_THEME="intika"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -50,4 +50,7 @@ source $ZSH/oh-my-zsh.sh
 PATH=~/bin:/usr/local/bin:$PATH
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=11"
+
+alias cp='cp --reflink=auto --sparse=always'
+
